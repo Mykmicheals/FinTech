@@ -1,7 +1,7 @@
 import { Dimensions, View, Text } from 'react-native'
 import React from 'react'
 import Modal from '../components/Modal'
-import Carousel from 'react-native-snap-carousel'
+// import Carousel from 'react-native-snap-carousel'
 import { accounts } from '../components/api';
 
 const data = [
@@ -26,7 +26,7 @@ const data = [
 const InvestScreen = () => {
     return (
         <View>
-          
+
 
         </View>
     )

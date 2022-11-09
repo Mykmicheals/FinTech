@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
         backgroundColor: 'black',
         height: '100%',
         color: '#fff',
-        zIndex:10
+        zIndex: 10
     },
     invest: {
         marginLeft: 20,
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
         width: 60,
         borderRadius: 50,
         position: 'absolute',
-        right:42
+        right: 42
     },
     savingsCard: {
         backgroundColor: '#1666DA',
@@ -102,8 +102,8 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         marginLeft: 5,
-        //flex: 2,
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        marginTop: 15
 
     },
     listCardWord: {
@@ -112,32 +112,56 @@ export const styles = StyleSheet.create({
 
     },
     quickCard: {
-        backgroundColor: '#D3D3D3',
+        backgroundColor: '#1C1E21',
         alignSelf: 'center',
-        color:'#fff',
+        color: '#fff',
         width: 150,
+        height: 170,
         margin: 10,
         padding: 10,
         borderRadius: 10,
+        padding: 15,
         borderBottomLeftRadius: 0
     },
+    quickTitle: {
+        color: '#E7439C',
+        marginBottom: 10
+    },
     quickCardMiddle: {
-        width: "70%"
+        width: "95%",
+        color: '#fff',
+        fontSize: 11,
+        fontWeight: '200'
+    },
+    quickCardFooter: {
+        color: '#E7439C',
+        marginTop: 15
+    },
+    quickIcon: {
+        // color: '#E7439C',
+        fontSize: 24,
+        marginBottom: 10
     },
     enable: {
         color: '#fff',
         textTransform: 'capitalize',
         fontSize: 13,
-        marginBottom:24
+        marginBottom: 24
     },
-    secondSection:{
+    secondSection: {
         flexDirection: 'row',
         marginTop: 24,
-        marginLeft:25,
+        marginLeft: 25,
     },
     switch: {
         position: 'absolute',
         right: 10,
-        bottom:10
+        bottom: 10
+    },
+
+    loginError: {
+        color: 'red',
+        marginBottom:20,
     }
+
 })

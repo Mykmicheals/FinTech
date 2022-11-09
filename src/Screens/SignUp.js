@@ -1,14 +1,49 @@
 import { Text, View, StyleSheet, Image } from 'react-native'
 import React, { useState } from 'react'
-import { TextInput, Button } from 'react-native-paper';
+import { TextInput, Button, HelperText, } from 'react-native-paper';
 
 
 
 const SignUp = ({ navigation }) => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [loginError, setLoginError] = useState(false)
+
     const [loading, setLoading] = useState(false)
     const [showSignUp, setShowSignUp] = useState(false)
-    const LoginHandler = (e) => {
+
+    const hasErrors = () => {
+        return !email.includes('@');
+    };
+
+    var sentData = {
+        email: email,
+        password: password
+    }
+
+    const LoginHandler = async (e) => {
         setLoading(true)
+        const response = await fetch('http://192.168.0.167:8000/login/', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+            body: JSON.stringify(sentData),
+
+        })
+        const data = await response.json();
+        console.log(data)
+
+        if (data.message === 'sucess') {
+            navigation.navigate('s')
+        } else {
+            setLoginError(true)
+            setPassword('')
+        }
+
+        setLoading(false)
+
     }
 
     const signUpHandler = () => {
@@ -20,11 +55,12 @@ const SignUp = ({ navigation }) => {
             <Image style={styles.rightImage} source={require('../../assets/Subtract.png')} />
             <Image style={styles.leftImage} source={require('../../assets/group.png')} />
             <Text style={styles.loginText}>{showSignUp ? 'Signup' : 'Login'}</Text>
-
+            {loginError && <Text style={styles.loginError}>Invalid Username or Password</Text>}
             {showSignUp && <View style={styles.inputView}>
                 <TextInput
                     mode="outlined"
                     label="Firstname"
+                    onChangeText={text => setText(text)}
                     left={<TextInput.Icon name="email" icon={'email-outline'}
                         iconColor="black" />}
 
@@ -55,16 +91,23 @@ const SignUp = ({ navigation }) => {
                 <TextInput
                     mode="outlined"
                     label="Email"
+                    onChangeText={text => setEmail(text)}
                     left={<TextInput.Icon name="email" icon={'email-outline'}
                         iconColor="black" />}
 
                 />
+                <HelperText type="error" visible={hasErrors()}>
+                    Email address is invalid!
+                </HelperText>
             </View>
             <View style={styles.inputView}>
                 <TextInput
                     Outlined
                     label="Password"
                     mode="outlined"
+                    value={password}
+                    secureTextEntry={true}
+                    onChangeText={text => setPassword(text)}
                     left={<TextInput.Icon name="email" icon={'account'}
                         iconColor="black" />}
                 />
@@ -89,7 +132,7 @@ const styles = StyleSheet.create({
         marginBottom: 30,
         marginTop: 90,
         fontWeight: '700',
-        fontSize:20,
+        fontSize: 20,
     },
     container: {
         backgroundColor: '#fff',
@@ -144,7 +187,7 @@ const styles = StyleSheet.create({
         bottom: -180,
         right: -220,
         zIndex: -3,
-      
+
     },
 
     polygon2: {

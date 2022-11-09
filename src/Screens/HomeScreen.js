@@ -34,7 +34,7 @@ const HomeScreen = () => {
             </View>
             <Text style={styles.investOp}>Inverstment Opportunities</Text>
             <Image style={styles.image1} source={require('../../assets/home1.jpg')} />
-            <View style={styles.listSection}>
+            {/* <View style={styles.listSection}>
                 <Text style={styles.investOp}>Todo-List</Text>
                 <SmallCard
                     icon='setting'
@@ -58,7 +58,7 @@ const HomeScreen = () => {
                     icon='settings'
                     word='safe lock N100,000 for 10 weeks'
                 />
-            </View>
+            </View> */}
 
             <Text style={styles.investOp}>Best Saver</Text>
             <Image style={styles.image1} source={require('../../assets/home2.jpg')} />

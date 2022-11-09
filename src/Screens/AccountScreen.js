@@ -51,10 +51,11 @@ const AccountScreen = () => {
             </View>
 
             {accounts.map((each) => {
-              return <SmallCard
-                  icon={each.icon}
-                  word = {each.word}
-              />  
+                return <SmallCard
+                    icon={each.icon}
+                    word={each.word}
+                    func='signup'
+                />
             })}
 
         </ScrollView>

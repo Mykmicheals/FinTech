@@ -25,20 +25,20 @@ export var accounts = [
     },
     {
         id: '5',
-        icon: 'user',
-        word: 'Todays Rate',
+        icon: 'bluetooth',
+        word: 'Refer and Earn',
 
     },
     {
         id: '6',
-        icon: 'user',
-        word: 'Todays Rate',
+        icon: 'dollar',
+        word: 'Withdraw Funds',
 
     },
     {
         id: '7',
-        icon: 'user',
-        word: 'Todays Rate',
+        icon: 'phone',
+        word: 'Contact Us',
 
     },
     {
@@ -49,7 +49,7 @@ export var accounts = [
     },
     {
         id: '9',
-        icon: 'user',
+        icon: 'bluetooth',
         word: 'Todays Rate',
 
     },
