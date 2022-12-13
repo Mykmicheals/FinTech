@@ -1,7 +1,3 @@
-// import './src/ignoreWarning'
-import { StatusBar } from 'expo-status-bar';
-import { Text, View, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { NavigationContainer, TabActions } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './src/Screens/Login';
@@ -15,16 +11,24 @@ import InvestScreen from './src/Screens/InvestScreen';
 import { Ionicons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Savings from './src/Screens/Savings';
+import { Provider } from 'react-redux';
+import store from './src/store';
+import Welcome from './src/Screens/Welcome';
+import SafeLockModal from './src/components/SafeLockModal';
+import PayScreen from './src/Screens/PayScreen';
 
 
+export const APPURL = 'https://userauth.pythonanywhere.com'
 
 const Stack = createNativeStackNavigator();
-const BTab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator()
+const HomeStack = createNativeStackNavigator();
+const SavingsStack = createNativeStackNavigator();
+const SettingsStack = createNativeStackNavigator();
 
-
-function ButtomTabs() {
+function HomeStackScreen() {
   return (
-    <BTab.Navigator
+    <HomeStack.Navigator
       screenOptions={{
         headerShown: false,
       }}
@@ -34,26 +38,52 @@ function ButtomTabs() {
         inactiveBackgroundColor: 'black',
       }}
     >
-      <BTab.Screen
-        name='Home' component={HomeScreen}
+      <HomeStack.Screen name="home" component={HomeScreen} />
+      <HomeStack.Screen name="savings" component={Savings} />
+      <HomeStack.Screen name="account" component={AccountScreen} />
+      <HomeStack.Screen name="invest" component={InvestScreen} />
+      <HomeStack.Screen name="settings" component={SettingsScreen} />
+      <HomeStack.Screen name="pay" component={PayScreen} />
+    </HomeStack.Navigator>
+  );
+}
+
+
+
+
+function ButtomTabs() {
+  return (
+
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      tabBarOptions={{
+
+        activeBackgroundColor: 'black',
+        inactiveBackgroundColor: 'black',
+      }}
+    >
+      <Tab.Screen
+        name='home' component={HomeStackScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" color={color} size={size} />
           ),
-          tabBarBadge: 3
+          tabBarBadge: 2
         }}
       />
 
-      <BTab.Screen
+      <Tab.Screen
         name='Savings' component={Savings}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="camera" color={color} size={size} />
+            <Ionicons name="rocket" color={color} size={size} />
           ),
 
         }}
       />
-      <BTab.Screen name='Account' component={AccountScreen}
+      <Tab.Screen name='Account' component={AccountScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Icon name="user" size={size} color={color} />
@@ -61,14 +91,14 @@ function ButtomTabs() {
 
         }}
       />
-      <BTab.Screen name='Settings' component={SettingsScreen}
+      {/* <Tab.Screen name='Settings' component={SettingsScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="settings" size={size} color={color} />
           ),
         }}
-      />
-      <BTab.Screen name='Invest' component={InvestScreen}
+      /> */}
+      <Tab.Screen name='Invest' component={InvestScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="heart" size={size} color={color} />
@@ -76,24 +106,31 @@ function ButtomTabs() {
         }}
       />
       {/* <BTab.Screen name='Apps' component={Login} /> */}
-    </BTab.Navigator>
+    </Tab.Navigator>
   )
 }
 
 export default function App() {
   return (
-    <PaperProvider>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{
-          headerShown: false
-        }}>
-          <Stack.Screen name='signup' component={SignUp} />
-          <Stack.Screen name="s" component={ButtomTabs} />
-          {/* <Stack.Screen name='signup' component={SignUp} /> */}
-          <Stack.Screen name='login' component={Login} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </PaperProvider>
+    <Provider store={store}>
+      <PaperProvider>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{
+            headerShown: false
+          }}>
+
+            <Stack.Screen name='welcome' component={Welcome} />
+            <Stack.Screen name='signup' component={SignUp} />
+            <Stack.Screen name="modal" component={SafeLockModal} />
+            <Stack.Screen name="s" component={ButtomTabs} />
+            <Stack.Screen name='login' component={Login} />
+
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+
+    </Provider>
+
   );
 }
 

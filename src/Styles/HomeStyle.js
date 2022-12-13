@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native'
+import { height, width } from './ModalStyle'
 
 export const styles = StyleSheet.create({
     container: {
         backgroundColor: 'black',
         height: '100%',
         color: '#fff',
-        zIndex: 10
+        zIndex: 10,
     },
     invest: {
         marginLeft: 20,
@@ -17,16 +18,16 @@ export const styles = StyleSheet.create({
     userName: {
         fontSize: 30,
         marginLeft: 20,
-        marginTop: 20,
-        color: '#fff'
+        marginTop: 1,
+        color: '#fff',
+        textTransform: 'capitalize'
     },
     containerTop: {
         flexDirection: 'row',
-        marginTop: 40,
+        marginTop: '10%',
     },
     profileImage: {
         marginLeft: 60,
-        marginTop: 20,
         height: 60,
         width: 60,
         borderRadius: 50,
@@ -86,29 +87,34 @@ export const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderLeftWidth: 1,
         borderRightWidth: 1,
-        padding: 10,
+        // padding: 10,
         width: '80%',
         borderRadius: 8,
         borderBottomLeftRadius: 0,
+        color: '#fff',
+        height: 0.08 * height
 
     },
     listCardIcon: {
         color: '#fff',
         marginRight: 30,
-        padding: 30,
+        marginLeft: 0.07 * width,
+        alignSelf: 'center',
+        //  padding: 30,
     },
     cardOuter: {
         flexDirection: 'row',
-        alignItems: 'center',
+         alignItems: 'center',
         alignSelf: 'center',
-        marginLeft: 5,
-        flexWrap: 'wrap',
-        marginTop: 15
+      marginLeft: 25,
+     flexWrap: 'wrap',
+        marginTop: 15,
+       // width: '50%'
 
     },
     listCardWord: {
         color: '#fff',
-        marginLeft: 200,
+        alignSelf: 'center',
 
     },
     quickCard: {
@@ -116,7 +122,7 @@ export const styles = StyleSheet.create({
         alignSelf: 'center',
         color: '#fff',
         width: 150,
-        height: 170,
+        height: 198,
         margin: 10,
         padding: 10,
         borderRadius: 10,
@@ -161,7 +167,74 @@ export const styles = StyleSheet.create({
 
     loginError: {
         color: 'red',
-        marginBottom:20,
+        marginBottom: 20,
+    },
+
+    welcomeLogo: {
+        textAlignVertical: 'center',
+        marginTop: 50
+    },
+    welcome: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100%'
+    },
+    chatIcon: {
+        backgroundColor: 'blue',
+        position: 'absolute',
+        bottom: 30,
+        right: 20,
+        padding: 10,
+        borderRadius: 50,
+        elevation: 30
+    },
+    chatContainer: {
+
+    },
+    chatButton: {
+
+    },
+    chatBottom: {
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+        backgroundColor: '#F0F2F5',
+        height: 60,
+        flexDirection: 'row'
+    },
+    chatInput: {
+        width: '80%',
+        height: 40,
+        marginTop: 20,
+        alignSelf: 'center'
+    },
+    modalStyle: {
+        height: 1 / 90,
+        width: '80%',
+        borderRadius: 10
+
+    },
+    lightText: {
+        color: '#fff'
+    },
+    DarkText: {
+        color: 'black'
+    },
+
+    quickSaveH: {
+        fontSize: 0.034 * height,
+        marginBottom: 0.034 * height,
+    },
+
+    quickSaveP: {
+        fontSize: 0.024 * height,
+        color: '#fff',
+        marginBottom: 0.09 * height,
+    },
+    savePage: {
+        marginTop: 0.1 * height,
+        paddingLeft: 0.05 * width,
+        paddingRight: 0.05 * width
     }
 
 })

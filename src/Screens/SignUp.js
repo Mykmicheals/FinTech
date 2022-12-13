@@ -1,43 +1,56 @@
-import { Text, View, StyleSheet, Image } from 'react-native'
+import { Text, View, StyleSheet, Image, } from 'react-native'
 import React, { useState } from 'react'
-import { TextInput, Button, HelperText, } from 'react-native-paper';
+import { TextInput, HelperText, Button } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { profileActions } from '../store/index';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import ToastManager, { Toast } from 'toastify-react-native'
 
-
+import { APPURL } from '../../App';
 
 const SignUp = ({ navigation }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    
+    const [firstname, setFistname] = useState('')
     const [loginError, setLoginError] = useState(false)
+
+
+    const dispatch = useDispatch()
 
     const [loading, setLoading] = useState(false)
     const [showSignUp, setShowSignUp] = useState(false)
 
-    const hasErrors = () => {
-        return !email.includes('@');
-    };
-
     var sentData = {
         email: email,
-        password: password
+        password: password,
+        first_name: firstname
     }
 
     const LoginHandler = async (e) => {
         setLoading(true)
-        const response = await fetch('http://192.168.0.167:8000/login/', {
+        const response = await fetch(`${APPURL}/${showSignUp ? 'signup/' : 'login/'}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
             },
             body: JSON.stringify(sentData),
-
         })
         const data = await response.json();
-        console.log(data)
 
-        if (data.message === 'sucess') {
+
+        if (data.message === 'sucess' || data.token) {
             navigation.navigate('s')
-        } else {
+            dispatch(profileActions.addname({
+                username: data.first_name
+            }))
+
+          Toast.success(`Welcome ${data.first_name}`)
+        }
+      
+
+        else {
             setLoginError(true)
             setPassword('')
         }
@@ -50,22 +63,16 @@ const SignUp = ({ navigation }) => {
         setShowSignUp(!showSignUp)
     }
 
+    console.log(sentData)
+
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Image style={styles.rightImage} source={require('../../assets/Subtract.png')} />
             <Image style={styles.leftImage} source={require('../../assets/group.png')} />
+            <Image style={styles.logo} source={require('../../assets/logo.png')} />
             <Text style={styles.loginText}>{showSignUp ? 'Signup' : 'Login'}</Text>
             {loginError && <Text style={styles.loginError}>Invalid Username or Password</Text>}
-            {showSignUp && <View style={styles.inputView}>
-                <TextInput
-                    mode="outlined"
-                    label="Firstname"
-                    onChangeText={text => setText(text)}
-                    left={<TextInput.Icon name="email" icon={'email-outline'}
-                        iconColor="black" />}
 
-                />
-            </View>}
 
             {showSignUp && <View style={styles.inputView}>
                 <TextInput
@@ -73,11 +80,12 @@ const SignUp = ({ navigation }) => {
                     label="Username"
                     left={<TextInput.Icon name="email" icon={'account'}
                         iconColor="black" />}
+                    onChangeText={text=>setFistname(text)}
 
                 />
             </View>}
 
-            {showSignUp && <View style={styles.inputView}>
+            {/* {showSignUp && <View style={styles.inputView}>
                 <TextInput
                     mode="outlined"
                     label="Phone number"
@@ -85,7 +93,7 @@ const SignUp = ({ navigation }) => {
                         iconColor="black" />}
 
                 />
-            </View>}
+            </View>} */}
 
             <View style={styles.inputView}>
                 <TextInput
@@ -96,9 +104,7 @@ const SignUp = ({ navigation }) => {
                         iconColor="black" />}
 
                 />
-                <HelperText type="error" visible={hasErrors()}>
-                    Email address is invalid!
-                </HelperText>
+
             </View>
             <View style={styles.inputView}>
                 <TextInput
@@ -112,8 +118,22 @@ const SignUp = ({ navigation }) => {
                         iconColor="black" />}
                 />
             </View>
+
+            <View style={styles.inputView}>
+                {showSignUp && <TextInput
+                    Outlined
+                    label="Confirm Password"
+                    mode="outlined"
+                    value={password}
+                    secureTextEntry={true}
+                    //   onChangeText={text => setPassword(text)}
+                    left={<TextInput.Icon name="email" icon={'account'}
+                        iconColor="black" />}
+                />}
+            </View>
             {loading ? <Button style={styles.buttonStyle} loading mode="contained"></Button>
                 : <Button onPress={LoginHandler} style={styles.buttonStyle} icon="login" mode="contained">{showSignUp ? 'Signup' : 'Login'} </Button>}
+
 
             <View style={styles.loginBottom}>
                 {showSignUp ? <Text>Already have an account?  <Text onPress={signUpHandler} style={styles.register}>Login</Text> </Text> : <Text>Don't have an accout? <Text onPress={signUpHandler} style={styles.register}>Register</Text></Text>}
@@ -121,7 +141,7 @@ const SignUp = ({ navigation }) => {
             </View>
             <Image style={styles.polygon1} source={require('../../assets/Polygon1.png')} />
             <Image style={styles.polygon2} source={require('../../assets/Polygon1.png')} />
-        </View>
+        </SafeAreaView>
     )
 }
 
@@ -197,6 +217,10 @@ const styles = StyleSheet.create({
         bottom: -230,
         right: -250,
         zIndex: -3,
+    },
+    loginError: {
+        color: 'red',
+        marginBottom: 2
     }
 
 

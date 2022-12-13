@@ -3,7 +3,6 @@ import React from 'react'
 import TopSection from '../components/TopSection'
 import { styles } from '../Styles/HomeStyle';
 import BigCard from '../components/BigCard';
-import { style } from 'deprecated-react-native-prop-types/DeprecatedImagePropType';
 
 const Savings = () => {
     return (

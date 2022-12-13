@@ -54,3 +54,25 @@ export var accounts = [
 
     },
 ]
+
+export const cardInfo = [
+    {
+        id: 1,
+        title: 'PiggyBank',
+        icon: 'user',
+        body: 'strict savings automatically. Daily, weekly or Montly, 10% pa',
+        footer: 'N0.00',
+        color: '#136BDC',
+
+    },
+
+    {
+        id: 2,
+        title: 'Dollar Account',
+        icon: 'user',
+        body: 'Pay cash into your dollar account to avoid inflation problems',
+        footer: '$0.00',
+        color: '#E7439C',
+
+    },
+]

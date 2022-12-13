@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import SignUp from './SignUp'
 import TopSection from '../components/TopSection'
 import { styles } from '../Styles/HomeStyle';
-import { ToggleButton, Switch } from 'react-native-paper';
+import { Switch } from 'react-native-paper';
 import { accounts } from '../components/api';
 import SmallCard from '../components/SmallCard';
 

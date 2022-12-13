@@ -11,7 +11,7 @@ import React from 'react'
 
 const Login = () => {
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             {/* <Image style={styles.image} source={require("./assets/log2.png")} /> */}
 
             {/* <StatusBar style="auto" /> */}
@@ -41,7 +41,7 @@ const Login = () => {
             <TouchableOpacity style={styles.loginBtn}>
                 <Text style={styles.loginText}>LOGIN</Text>
             </TouchableOpacity>
-        </View>
+        </SafeAreaView>
     )
 }
 
